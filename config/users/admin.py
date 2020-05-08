@@ -14,7 +14,7 @@ class UserCreationForm(forms.ModelForm):
 
 	class Meta:
 		model = User
-		fields = ('username', 'email','is_staff', 'firstname', 'lastname','phone',)
+		fields = ('username', 'email','is_staff', 'firstname', 'lastname','phone','image')
 
 
 	def clean_password2(self):
@@ -37,7 +37,7 @@ class UserChangeForm(forms.ModelForm):
 	password = ReadOnlyPasswordHashField()
 	class Meta:
 		model = User
-		fields = ('username', 'email','is_staff', 'firstname', 'lastname', 'phone')
+		fields = ('username', 'email','is_staff', 'firstname', 'lastname', 'phone','image')
 
 	def clean_password(self):
 	# Regardless of what the user provides, return the initial value.
@@ -58,7 +58,7 @@ class UserAdmin(BaseUserAdmin):
 	list_filter = ('is_staff',)
 	fieldsets = (
 		(None, {'fields': ('username', 'password')}),
-		('Personal info', {'fields': ('email','firstname','lastname', 'phone', )}),
+		('Personal info', {'fields': ('email','firstname','lastname', 'phone','image' )}),
 		('Permissions', {'fields': ('is_staff',)}),
 		)
 		# add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
