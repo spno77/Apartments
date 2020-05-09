@@ -9,7 +9,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from PIL import Image
 
-
+	
 class UserManager(BaseUserManager):
 	def create_user(self, username, email, password=None):
 		if username is None:
@@ -36,6 +36,18 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+	
+	GUEST = 'GU'
+	HOST = 'HO'
+	COSTUMER = 'CO'
+
+	ROLE_CHOICES = [
+		(GUEST,'Guest'),
+		(HOST,'Host'),
+		(COSTUMER,'Costumer'),
+	]	
+
+	
 	username = models.CharField(db_index=True, max_length=255, unique=True,null=False)
 	email = models.EmailField(db_index=True, unique=True,null=False)
 	is_staff = models.BooleanField(default=False)
@@ -43,7 +55,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 	lastname = models.CharField(max_length=30,null=False)
 	phone = models.CharField(max_length=12,null=False)
 	image = models.ImageField(default='default.jpg',upload_to='images')
-
+	role = models.CharField(max_length=2,choices=ROLE_CHOICES,default=GUEST)
+	
+	
 	objects = UserManager()
 
 	USERNAME_FIELD = 'username'
@@ -65,3 +79,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 		return self.username
 
 
+
+	
