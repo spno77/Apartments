@@ -8,8 +8,7 @@ from .models import Apartment,Availability
 class AvailabilitySerializer(serializers.ModelSerializer):
 
 	apartment = serializers.PrimaryKeyRelatedField(queryset=Apartment.objects.all())
-	#post = serializers.PrimaryKeyRelatedField(queryset=Blog.objects.all())
-
+	
 	class Meta:
 		model = Availability
 		fields = ['from_date','to_date','apartment']
@@ -24,14 +23,3 @@ class ApartmentSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Apartment
 		fields = ['id','description','price','garage','wifi','rooms','owner','availability']
-
-"""
-	def create(self,validated_data):
-		availability_data = validated_data.pop('availability')
-		owner_data = validated_data.pop('owner')
-		apartment = Apartment.objects.create(**validated_data)
-		for i in availability_data:
-			Availability.objects.create(apartment=apartment,**i)
-		return apartment 
-
-"""
