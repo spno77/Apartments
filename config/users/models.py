@@ -9,6 +9,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from PIL import Image
 
+from django.utils.translation import ugettext_lazy as _
 	
 class UserManager(BaseUserManager):
 	def create_user(self, username, email, password=None):
@@ -37,14 +38,14 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
 	
-	GUEST = 'GU'
-	HOST = 'HO'
-	COSTUMER = 'CO'
+	GUEST = 'guest'
+	HOST = 'host'
+	COSTUMER = 'costumer'
 
 	ROLE_CHOICES = [
-		(GUEST,'Guest'),
-		(HOST,'Host'),
-		(COSTUMER,'Costumer'),
+		(GUEST,_('guest')),
+		(HOST,_('host')),
+		(COSTUMER,_('costumer')),
 	]	
 
 	
@@ -55,7 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	lastname = models.CharField(max_length=30,null=False)
 	phone = models.CharField(max_length=12,null=False)
 	image = models.ImageField(default='default.jpg',upload_to='images')
-	role = models.CharField(max_length=2,choices=ROLE_CHOICES,default=GUEST)
+	role = models.CharField(max_length=10,choices=ROLE_CHOICES,default=GUEST)
 	
 	
 	objects = UserManager()
