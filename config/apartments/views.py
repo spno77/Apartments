@@ -9,8 +9,11 @@ from users.models import User
 from django.shortcuts import get_object_or_404
 from . import models
 
+from .permissions import IsOwnerOrAdmin,IsOwner,IsAvailable
+from rest_framework import permissions
+
 class ApartmentList(generics.ListCreateAPIView):
-	#permission_classes = [permissions.IsAdminUser,]
+	permission_classes = [permissions.AllowAny,]
 	queryset = Apartment.objects.all()
 	serializer_class = ApartmentSerializer
 
@@ -19,20 +22,22 @@ class ApartmentList(generics.ListCreateAPIView):
 
 
 class ApartmentDetail(generics.RetrieveUpdateDestroyAPIView):
-	#permission_classes = [IsOwnerOrAdmin,]
+	permission_classes = [IsOwner,]
 	queryset = Apartment.objects.all()
 	serializer_class = ApartmentSerializer
 
 
-class AvailabilityDetail(generics.RetrieveUpdateDestroyAPIView):
-	#permission_classes = [IsOwnerOrAdmin,]
+class AvailabilityList(generics.ListCreateAPIView):
+	permission_classes = [permissions.AllowAny,]
 	queryset = Availability.objects.all()
 	serializer_class = AvailabilitySerializer
 
-class AvailabilityList(generics.ListCreateAPIView):
-	#permission_classes = [IsOwnerOrAdmin,]
+
+class AvailabilityDetail(generics.RetrieveUpdateDestroyAPIView):
+	permission_classes = [IsAvailable,]
 	queryset = Availability.objects.all()
 	serializer_class = AvailabilitySerializer
+
 
 
 
