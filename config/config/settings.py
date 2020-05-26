@@ -44,10 +44,13 @@ INSTALLED_APPS = [
     #3rd party
     'rest_framework',
     'rest_auth',
+<<<<<<< HEAD
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth.registration',
+=======
+>>>>>>> 2b43a52a538b1a86451738dfd6a25808fb73a1ba
 
     #local
     'apartments',
@@ -168,8 +171,12 @@ JWT_AUTH = {
 }
 
 
+<<<<<<< HEAD
 REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'users.serializers.UserSerializer' } 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
+=======
+REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'users.serializers.UserSerializer' } 
+>>>>>>> 2b43a52a538b1a86451738dfd6a25808fb73a1ba
