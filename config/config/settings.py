@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     
     #3rd party
     'rest_framework',
+    'rest_auth',
 
     #local
     'apartments',
-    'users'
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +161,6 @@ JWT_AUTH = {
     # it can be refreshed.  exprired tokens can't be refreshed.
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
+
+
+REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'users.serializers.UserSerializer' } 
