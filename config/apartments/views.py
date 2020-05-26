@@ -12,7 +12,8 @@ from . import models
 from .permissions import IsOwnerOrAdmin,IsOwner,IsAvailable
 from rest_framework import permissions
 
-class ApartmentList(generics.ListCreateAPIView):
+
+class ApartmentList(generics.ListAPIView):
 	permission_classes = [permissions.AllowAny,]
 	queryset = Apartment.objects.all()
 	serializer_class = ApartmentSerializer
@@ -21,10 +22,32 @@ class ApartmentList(generics.ListCreateAPIView):
 		serializer.save(owner=self.request.user)
 
 
-class ApartmentDetail(generics.RetrieveUpdateDestroyAPIView):
+class ApartmentCreate(generics.CreateAPIView):
+	permission_classes = [permissions.IsAuthenticatedOrReadOnly,]
+	queryset = Apartment.objects.all()
+	serializer_class = ApartmentSerializer
+
+	def perform_create(self, serializer):
+		serializer.save(owner=self.request.user)
+
+
+class ApartmentDetail(generics.RetrieveAPIView):
+	permission_classes = [permissions.AllowAny,]
+	queryset = Apartment.objects.all()
+	serializer_class = ApartmentSerializer
+
+
+class ApartmentUpdate(generics.UpdateAPIView):
 	permission_classes = [IsOwner,]
 	queryset = Apartment.objects.all()
 	serializer_class = ApartmentSerializer
+
+
+class ApartmentDelete(generics.DestroyAPIView):
+	permission_classes = [IsOwner,]
+	queryset = Apartment.objects.all()
+	serializer_class = ApartmentSerializer
+
 
 
 class AvailabilityList(generics.ListCreateAPIView):
