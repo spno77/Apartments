@@ -19,6 +19,8 @@ urlpatterns = [
 	path('api-token-auth/', obtain_jwt_token),
 	path('api-token-refresh/', refresh_jwt_token),
 
+	path('api/v1/rest-auth/registration/',include('rest_auth.registration.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
