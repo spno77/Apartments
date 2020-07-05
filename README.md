@@ -1,2 +1,2 @@
 # Apartaments
-Django API for apartaments
+Django API for apartments.
