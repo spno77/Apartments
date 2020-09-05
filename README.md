@@ -4,7 +4,7 @@ Django API for apartments.
 ### Installation
 
 **Create virtual env**
-	>python3 -m venv env	
+> python3 -m venv env	
 
 **Activate the virtual env**
 > source env/bin/activate
