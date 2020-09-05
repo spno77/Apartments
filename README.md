@@ -1,4 +1,4 @@
-# Apartaments
+# Apartments API
 Django API for apartments.
 
 ### Installation
